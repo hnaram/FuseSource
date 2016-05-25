@@ -1,6 +1,12 @@
 Fabric Gateway
 ===============
 
+Links used
+==========
+
+http://www.rubix.nl/blogs/jboss-fuse-62-first-look-http-gateway
+
+
 Files
 =====
 

@@ -1,6 +1,12 @@
 
 ############## CXF loadbalancing ####################
 
+Links used
+==========
+
+https://pgaemers.wordpress.com/2015/02/26/fabric-load-balancer-for-cxf-part-1/
+https://pgaemers.wordpress.com/2015/03/16/fabric-load-balancer-for-cxf-part-2/
+
 Steps
 =====
 
