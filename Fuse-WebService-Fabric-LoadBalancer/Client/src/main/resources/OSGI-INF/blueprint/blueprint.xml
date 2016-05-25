@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/blueprint"
+       xmlns:cxf="http://camel.apache.org/schema/blueprint/cxf"
+       xmlns:cxf-core="http://cxf.apache.org/blueprint/core"
+       xsi:schemaLocation="
+       http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+       http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
+ 
+  <cxf:rsServer id="proxyEndpoint" address="http://localhost:1234/proxy" serviceClass="com.redhat.Endpoint"/>
+ 
+  <cxf:rsClient id="clientEndpoint" address="http://dummy/url" serviceClass="com.redhat.Endpoint">
+    <cxf:features>
+        <ref component-id="fabricLoadBalancerFeature"/>
+      </cxf:features>
+  </cxf:rsClient> 
+ 
+ <reference id="curator" interface="org.apache.curator.framework.CuratorFramework" />
+ 
+    <bean id="fabricLoadBalancerFeature" class="io.fabric8.cxf.FabricLoadBalancerFeature">
+        <property name="curator" ref="curator" />
+        <property name="fabricPath" value="cxf/endpoints" />
+    </bean>
+   
+  <camelContext id="cxfProxyContext" trace="false" xmlns="http://camel.apache.org/schema/blueprint">
+    <route id="cxfProxyRoute">
+      <from uri="cxfrs:bean:proxyEndpoint"/>
+      <log message="got proxy request"/>
+      <to uri="cxfrs:bean:clientEndpoint"/>
+    </route>
+  </camelContext>
+ 
+</blueprint>
