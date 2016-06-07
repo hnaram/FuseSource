@@ -3,15 +3,15 @@ Environment Details
 
 Root: 
 Name: root
-IP: 10.64.32.160
+IP: 10.10.10.10
 
 Child-1
 Name: ssh-a
-IP: 192.168.122.58
+IP: 10.10.10.20
 
 Child-2
 Name: ssh-b
-IP: 192.168.122.136
+IP: 10.10.10.30
 
 
 Steps
@@ -20,21 +20,21 @@ Steps
 
 2. Then create a fabric on it 
 
-fabric:create --wait-for-provisioning --verbose --clean --new-user admin --new-user-role admin --new-user-password admin --zookeeper-password passwd --resolver manualip --manual-ip 10.64.32.160
+fabric:create --wait-for-provisioning --verbose --clean --new-user admin --new-user-role admin --new-user-password admin --zookeeper-password passwd --resolver manualip --manual-ip 10.10.10.10
 
 3. Make sure that the iptables and firewalld are stopped
 
 4. Create a ssh container with below commands
 
 
-fabric:container-create-ssh --host 192.168.122.58 --user root --password Wed@321 --new-user admin --new-user-password admin --resolver manualip --manual-ip 192.168.122.58 ssh-a
+fabric:container-create-ssh --host 10.10.10.20 --user root --password Wed@321 --new-user admin --new-user-password admin --resolver manualip --manual-ip 10.10.10.20 ssh-a
 
 
-fabric:container-create-ssh --host 192.168.122.136 --user root --password Wed@321 --new-user admin --new-user-password admin --resolver manualip --manual-ip 192.168.122.136 ssh-b
+fabric:container-create-ssh --host 10.10.10.30 --user root --password Wed@321 --new-user admin --new-user-password admin --resolver manualip --manual-ip 10.10.10.30 ssh-b
 
 5. If there is an issue check adding below entry in etc/System.properties of all the three containers
 
-global.resolver=10.64.32.160
+global.resolver=10.10.10.10
 
 Also make sure that the service iptables and firewalld are stopped and sshd service is running.
 

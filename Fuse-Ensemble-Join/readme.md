@@ -40,7 +40,7 @@ Create the Ensemble from A using the below command.
 JBossFuse:karaf@root> ensemble-add fabric-b fabric-c 
 This will change of the zookeeper connection string.
 Are you sure want to proceed(yes/no):yes
-Updated Zookeeper connection string: 10.64.33.68:2182,10.64.33.68:2183,10.64.33.68:2184
+Updated Zookeeper connection string: 10.10.10.10:2182,10.10.10.10:2183,10.10.10.10:2184
 --------------------------------------------------------------------------------------
 
 Check the Ensemble
